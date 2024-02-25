@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me Design</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <div class="title">
+            <h2>Contact Me!</h2>
+        </div>
+        <div class="form">
+            
+            <div class="inputBox">
+                <input type="text" name="sendername" id="sendername" class="name" autocomplete="off" required>
+                <span>Nama Anda</span>
+            </div>
+            <span class="line"></span>
+            
+            <div class="inputBox">
+                <input type="text" name="to" id="to" class="name" autocomplete="off" readonly value="adixavraa@gmail.com">
+                <span>e-mail saya</span>
+            </div>
+            <span class="line"></span>
+            
+            <div class="inputBox">
+                <input type="text" name="subject" id="subject" class="name" autocomplete="off" >
+                <span>Subject</span>
+            </div>
+            <span class="line"></span>
+
+
+            <div class="message">
+                <span>Pesan Anda</span>
+                <textarea name="message" id="message" cols="30" rows="10"></textarea>
+                <button type="submit" onclick="sendMail();">send</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+
+    <script>
+        
+        function sendMail(){
+            (function(){
+                emailjs.init("047rDEB6-8coRJvTp"); //account Public key
+            })();
+
+            const params = {
+                sendername: document.querySelector("#sendername").value,
+                to: document.querySelector("#to").value,
+                subject: document.querySelector("#subject").value,
+                message: document.querySelector("#message").value,
+            };
+
+
+            const serviceID = "service_qu5s8i9"; // email service ID
+            const templateID = "template_hs44hb4"; // email template ID
+
+            emailjs.send(serviceID, templateID, params)
+            .then( res => {
+                alert("Email sent successfully");
+            })
+            .catch();
+        }
+
+
+    </script>
+</body>
+</html>
